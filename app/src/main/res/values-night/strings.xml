@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="text_point">Точка не выбрана</string>
+    <string name="show_on_map">Показать на карте</string>
+</resources>
