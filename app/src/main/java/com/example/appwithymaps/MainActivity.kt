@@ -1,9 +1,13 @@
 package com.example.appwithymaps
 
+import android.content.Intent
 import android.location.Geocoder
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.yandex.mapkit.Animation
 import com.yandex.mapkit.GeoObject
@@ -24,6 +28,7 @@ class MainActivity : AppCompatActivity(), GeoObjectTapListener, InputListener {
 
     lateinit var mapObjects: MapObjectCollection
     lateinit var animationHandler: Handler
+    lateinit var address: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,8 +80,18 @@ class MainActivity : AppCompatActivity(), GeoObjectTapListener, InputListener {
         //.setText(point.latitude.toString() + " " + point.longitude.toString())
         val geo = Geocoder(this)
         val inf = geo.getFromLocation(point.latitude, point.longitude, 1)
-        val address = inf[0].getAddressLine(0)
-        val pin = mapsObject.addPlacemark(point).setText(address + "" + "\n" + "(${point.latitude} ${point.longitude})" )
+        address = inf[0].getAddressLine(0) + "" + "\n" + "(${point.latitude} ${point.longitude})"
+        val pin = mapsObject.addPlacemark(point).setText(address)
+
+        findViewById<Button>(R.id.confirm_button).setOnClickListener {
+            dataTransmission(address)
+        //    val intent3 = Intent(this, StartActivity::class.java)
+//            startActivity(intent3)
+
+
+        }
+
+
 
     }
 
@@ -84,6 +99,12 @@ class MainActivity : AppCompatActivity(), GeoObjectTapListener, InputListener {
 
     override fun onMapLongTap(map: Map, point: Point) {
 
+    }
+
+    private fun dataTransmission(data: String) {
+        val intent2 = Intent(this, StartActivity::class.java)
+        intent2.putExtra("key", data)
+        startActivity(intent2)
     }
 
 }
