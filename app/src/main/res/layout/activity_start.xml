@@ -25,7 +25,19 @@
             android:padding="35dp"
             android:text="@string/point_on_map"
             android:textSize="35sp" />
+
+        <TextView
+            android:id="@+id/text_on_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="35dp"
+            android:text="@string/point_on_map"
+            android:textSize="35sp"
+            android:visibility="visible" />
     </androidx.cardview.widget.CardView>
+
+
 
     <Button
         android:id="@+id/show_on_map"

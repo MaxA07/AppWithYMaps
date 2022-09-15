@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -25,11 +26,7 @@ import com.yandex.runtime.image.ImageProvider
 class MainActivity : AppCompatActivity(), GeoObjectTapListener, InputListener {
 
     lateinit var mapView: MapView
-
-    lateinit var mapObjects: MapObjectCollection
-    lateinit var animationHandler: Handler
     lateinit var address: String
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +39,6 @@ class MainActivity : AppCompatActivity(), GeoObjectTapListener, InputListener {
             CameraPosition(Point(56.305326, 43.996373), 11.0f, 0.0f, 0.0f),
             Animation(Animation.Type.SMOOTH, 2f), null
         )
-        mapObjects = mapView.map.mapObjects.addCollection()
-        animationHandler = Handler(Looper.getMainLooper())
 
         mapView.map.addTapListener(this)
         mapView.map.addInputListener(this)
@@ -77,7 +72,6 @@ class MainActivity : AppCompatActivity(), GeoObjectTapListener, InputListener {
         mapView.map.deselectGeoObject()
 
         val mapsObject = mapView.map.mapObjects
-        //.setText(point.latitude.toString() + " " + point.longitude.toString())
         val geo = Geocoder(this)
         val inf = geo.getFromLocation(point.latitude, point.longitude, 1)
         address = inf[0].getAddressLine(0) + "" + "\n" + "(${point.latitude} ${point.longitude})"
@@ -85,20 +79,10 @@ class MainActivity : AppCompatActivity(), GeoObjectTapListener, InputListener {
 
         findViewById<Button>(R.id.confirm_button).setOnClickListener {
             dataTransmission(address)
-        //    val intent3 = Intent(this, StartActivity::class.java)
-//            startActivity(intent3)
-
-
         }
-
-
-
     }
 
-
-
     override fun onMapLongTap(map: Map, point: Point) {
-
     }
 
     private fun dataTransmission(data: String) {
