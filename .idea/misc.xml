@@ -3,8 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/user/AndroidStudioProjects/AppWithYMaps/app/src/main/res/layout/activity_main.xml" value="0.35885416666666664" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/AppWithYMaps/app/src/main/res/drawable/mark.xml" value="0.1925" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/AppWithYMaps/app/src/main/res/drawable/mark_background.xml" value="0.232" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/AppWithYMaps/app/src/main/res/drawable/mark_foreground.xml" value="0.232" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/AppWithYMaps/app/src/main/res/layout/activity_adress.xml" value="0.3873957367933272" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/AppWithYMaps/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/AppWithYMaps/app/src/main/res/layout/activity_main2.xml" value="0.35885416666666664" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/AppWithYMaps/app/src/main/res/layout/activity_start.xml" value="0.35333333333333333" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/AppWithYMaps/app/src/main/res/layout/fragment_map.xml" value="0.35885416666666664" />
         <entry key="..\:/Users/user/AndroidStudioProjects/AppWithYMaps/app/src/main/res/layout/fragment_point_on_map.xml" value="0.35333333333333333" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/AppWithYMaps/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.232" />
         <entry key="..\:/apps/AppwithYmaps/app/src/main/res/layout/activity_main.xml" value="0.35260416666666666" />
       </map>
     </option>

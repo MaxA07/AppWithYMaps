@@ -2,4 +2,7 @@
 <resources>
     <string name="text_point">Точка не выбрана</string>
     <string name="show_on_map">Показать на карте</string>
+    <string name="title_activity_start">ActivityStart</string>
+    <string name="point_on_map">Точка не задана</string>
+    <string name="key">key</string>
 </resources>

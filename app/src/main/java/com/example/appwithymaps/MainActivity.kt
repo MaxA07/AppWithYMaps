@@ -1,30 +1,29 @@
 package com.example.appwithymaps
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.yandex.mapkit.Animation
-import com.yandex.mapkit.GeoObject
 import com.yandex.mapkit.MapKitFactory
-import com.yandex.mapkit.geometry.Geo
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.layers.GeoObjectTapEvent
 import com.yandex.mapkit.mapview.MapView
 import com.yandex.mapkit.layers.GeoObjectTapListener
-
-import com.yandex.mapkit.map.*
+import com.yandex.mapkit.map.CameraPosition
+import com.yandex.mapkit.map.GeoObjectSelectionMetadata
+import com.yandex.mapkit.map.InputListener
 import com.yandex.mapkit.map.Map
-import com.yandex.runtime.image.ImageProvider
+
 
 class MainActivity : AppCompatActivity(), GeoObjectTapListener, InputListener {
 
     lateinit var mapView: MapView
-
-    lateinit var mapObjects: MapObjectCollection
-    lateinit var animationHandler: Handler
-
+    lateinit var address: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,13 +31,13 @@ class MainActivity : AppCompatActivity(), GeoObjectTapListener, InputListener {
         MapKitFactory.initialize(this)
         setContentView(R.layout.activity_main)
 
+        getLocationPermission()
+
         mapView = findViewById(R.id.mapView)
         mapView.map.move(
-            CameraPosition(Point(56.305326, 43.996373), 11.0f, 0.0f, 0.0f),
+            CameraPosition(Point(55.682586, 37.546886), 11.0f, 0.0f, 0.0f),
             Animation(Animation.Type.SMOOTH, 2f), null
         )
-        mapObjects = mapView.map.mapObjects.addCollection()
-        animationHandler = Handler(Looper.getMainLooper())
 
         mapView.map.addTapListener(this)
         mapView.map.addInputListener(this)
@@ -72,19 +71,39 @@ class MainActivity : AppCompatActivity(), GeoObjectTapListener, InputListener {
         mapView.map.deselectGeoObject()
 
         val mapsObject = mapView.map.mapObjects
-        //.setText(point.latitude.toString() + " " + point.longitude.toString())
         val geo = Geocoder(this)
         val inf = geo.getFromLocation(point.latitude, point.longitude, 1)
-        val address = inf[0].getAddressLine(0)
-        val pin = mapsObject.addPlacemark(point).setText(address + "" + "\n" + "(${point.latitude} ${point.longitude})" )
+        address = inf[0].getAddressLine(0) + "" + "\n" + "(${point.latitude} ${point.longitude})"
+        val pin = mapsObject.addPlacemark(point).setText(address)
 
+        findViewById<Button>(R.id.confirm_button).setOnClickListener {
+            dataTransmission(address)
+        }
     }
-
-
 
     override fun onMapLongTap(map: Map, point: Point) {
-
     }
+
+    private fun dataTransmission(data: String) {
+        val intent2 = Intent(this, StartActivity::class.java)
+        intent2.putExtra("key", data)
+        startActivity(intent2)
+    }
+
+    private fun getLocationPermission() {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ){
+            val permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION)
+            ActivityCompat.requestPermissions(this, permissions,0)
+        }
+    }
+
 
 }
 
